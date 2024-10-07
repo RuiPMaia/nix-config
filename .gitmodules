@@ -1,0 +1,14 @@
+[submodule "dotfiles/dmenu"]
+	path = dotfiles/dmenu
+	url = git@github.com:RuiPMaia/dmenu.git
+[submodule "dotfiles/dwm"]
+	path = dotfiles/dwm
+	url = git@github.com:RuiPMaia/dwm.git
+[submodule "dotfiles/dwmblocks"]
+	path = dotfiles/dwmblocks
+	url = git@github.com:RuiPMaia/dwmblocks.git
+[submodule "dotfiles/st"]
+	path = dotfiles/st
+	url = git@github.com:RuiPMaia/st.git
+[submodule]
+	recurse = true
