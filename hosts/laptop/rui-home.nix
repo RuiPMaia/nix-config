@@ -31,15 +31,15 @@
     brave
     dmenu
     (st.overrideAttrs (oldAttrs: rec {
-      src = /home/rui/st;
+      src = ../../dotfiles/st;
       buildInputs = oldAttrs.buildInputs ++ [harfbuzz];
     }))
     (dwm.overrideAttrs (oldAttrs: rec {
-      src = /home/rui/dwm;
+      src = ../../dotfiles/dwm;
       buildInputs = oldAttrs.buildInputs ++ [harfbuzz];
     }))
     (dwmblocks.overrideAttrs (oldAttrs: rec {
-      src = /home/rui/dwmblocks;
+      src = ../../dotfiles/dwmblocks;
       buildInputs = oldAttrs.buildInputs ++ [harfbuzz];
     }))
     bat
