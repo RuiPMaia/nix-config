@@ -174,6 +174,7 @@
   };
 
   programs.git = {
+    enable = true;
     userName = "RuiPMaia";
     userEmail = "ruipmaia29@gmail.com";
   };
