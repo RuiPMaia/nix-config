@@ -84,6 +84,7 @@
     };
     ".config/emacs/init.el".source = ../../dotfiles/emacs/init.el;
     ".local/share/bg".source = ../../backgrounds/thiemeyer_road_to_samarkand.jpg;
+    "./media".source = config.lib.file.mkOutOfStoreSymlink "/media";
   };
 
   home.sessionVariables = {

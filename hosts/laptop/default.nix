@@ -17,12 +17,13 @@
     loader = {
       efi.canTouchEfiVariables = true;
       grub = {
-	enable = true;
-	device = "nodev";
-	efiSupport = true;
+	      enable = true;
+	      device = "nodev";
+	      efiSupport = true;
       };	
     };
-    initrd.luks.devices.cryptroot.device = "/dev/disk/by-uuid/454a8574-2ebb-42c5-9689-cc64c3fdb48f";
+    # initrd.luks.devices.cryptroot.device = "/dev/disk/by-uuid/454a8574-2ebb-42c5-9689-cc64c3fdb48f";
+    initrd.luks.devices.cryptroot.device = "/dev/disk/by-label/NIXOS";
   };
 
   networking.hostName = "laptop"; # Define your hostname.
@@ -44,6 +45,7 @@
   console = {
     font = "Lat2-Terminus16";
     keyMap = "pt-latin1";
+    earlySetup = true;
   };
 
   # Enable the X11 windowing system.
@@ -93,14 +95,14 @@
     };
   };
 
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    git
     vim     
     wget
-    git
     curl
   ];
 
