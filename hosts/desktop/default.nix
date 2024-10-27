@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./disko-config.nix
       inputs.home-manager.nixosModules.default
     ];
 
@@ -22,8 +23,7 @@
 	      efiSupport = true;
       };	
     };
-    # initrd.luks.devices.cryptroot.device = "/dev/disk/by-uuid/454a8574-2ebb-42c5-9689-cc64c3fdb48f";
-    initrd.luks.devices.cryptroot.device = "/dev/disk/by-label/NIXOS";
+    # initrd.luks.devices.cryptroot.device = "/dev/disk/by-label/NIXOS";
   };
 
   networking.hostName = "laptop"; # Define your hostname.

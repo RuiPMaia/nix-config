@@ -3,8 +3,8 @@
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "rui";
-  home.homeDirectory = "/home/rui";
+  home.username = "nixos";
+  home.homeDirectory = "/home/nixos";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -18,26 +18,9 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  #nixpkgs.overlays = [
-  #  (import (builtins.fetchTarball {
-  #    url = "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
-  #    sha256 = "14vpc0n1w44wr4lqwx0q6ipbc9n3d1cnm6whf0pcnyh5cg10h0z2";
-  #  }))
-  #];
-  nixpkgs.config.allowUnfreePredicate = pkg:
-  builtins.elem (lib.getName pkg) [
-    # Add additional package names here
-    "adobe-reader"
-  ];
-
-  nixpkgs.config.permittedInsecurePackages = [
-    "adobe-reader-9.5.5"
-  ];
-
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-    brave
     dmenu
     (st.overrideAttrs (oldAttrs: rec {
       src = ../../dotfiles/st;
@@ -51,34 +34,13 @@
       src = ../../dotfiles/dwmblocks;
       buildInputs = oldAttrs.buildInputs ++ [harfbuzz];
     }))
-    adobe-reader
     bat
-    cmake
     file
     fira-code
-    gcc
-    gnumake
-    curl
-    wget
-    iosevka
-    iosevka-bin
-    iosevka-comfy.comfy
-    ispell
     libnotify
-    libvterm
-    libtool
     pulsemixer
-    texliveFull
-    ueberzug
-    xwallpaper
     xdotool
     xorg.xmodmap
-    zotero
-    #(emacsWithPackagesFromUsePackage {
-    #  config = dotfiles/.config/emacs/init.el;
-    #  defaultInitFile = true;
-    #  alwaysEnsure = true;
-    #})
   ];
   
   fonts.fontconfig.enable = true;
@@ -96,21 +58,17 @@
       source = ../../scripts;
       recursive = true;
     };
-    ".config/emacs/init.el".source = ../../dotfiles/emacs/init.el;
-    ".local/share/bg".source = ../../backgrounds/thiemeyer_road_to_samarkand.jpg;
-    "./media".source = config.lib.file.mkOutOfStoreSymlink "/media";
   };
 
   home.sessionVariables = {
     TERMINAL = "st";
-    BROWSER = "brave";
+    BROWSER = "firefox";
   };
 
   xsession = {
     enable = true;
     windowManager.command = "ssh-agent dwm";
     initExtra = ''
-      setbg &
       xmodmap ${pkgs.writeText "xkb-layout" (lib.fileContents ../../dotfiles/x11/xmodmap)}'';
     profilePath = ".config/x11/xprofile";
     scriptPath = ".config/x11/xsession";
@@ -146,46 +104,13 @@
   programs.neovim = {
     enable = true;
     defaultEditor = true;
-    # extraConfig = lib.fileContents dotfiles/.config/nvim/init.vim;
     viAlias = true;
     vimAlias = true;
-  };
-
-  programs.emacs = {
-    enable = true;
-    # extraConfig = lib.fileContents dotfiles/.config/emacs/init.el;
   };
 
   programs.lf = {
     enable = true;
     extraConfig = lib.fileContents ../../dotfiles/lf/lfrc;
-  };
-
-  programs.zathura = {
-    enable = true;
-    options = {
-      sandbox = "none";
-      statusbar-h-padding = 0;
-      statusbar-v-padding = 0;
-      page-padding = 1;
-      adjust-open = "best-fit";
-      selection-clipboard = "clipboard";
-      recolor-lightcolor = "#222221";
-      recolor-keephue = true;
-      default-bg = "#222230";
-    };
-    mappings = {
-      u = "scroll half-up";
-      d = "scroll half-down";
-      D = "toggle_page_mode";
-      r = "reload";
-      R = "rotate";
-      K = "zoom in";
-      J = "zoom out";
-      i = "recolor";
-      p = "print";
-      g = "goto top";
-    };
   };
 
   programs.git = {
@@ -228,22 +153,6 @@
     };
   };
   
-  services.emacs.enable = true;
   services.unclutter.enable = true;
   services.blueman-applet.enable = true;
-
-  #wayland.windowManager.sway = {
-  #  enable = true;
-  #  config = rec {
-  #    modifier = "Mod1";
-  #    terminal = "kitty";
-  #    input = {
-  #      "*" = {
-  #        xkb_layout = "pt";
-  #        repeat_delay = "300";
-  #        repeat_rate = "50";
-  #      };
-  #    };
-  #  };
-  #};
 }

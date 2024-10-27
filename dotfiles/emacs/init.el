@@ -169,7 +169,7 @@ Exempt major modes are defined in `display-line-numbers-exempt-modes'."
                   (org-level-6 . 1.1)
                   (org-level-7 . 1.1)
                   (org-level-8 . 1.1)))
-    (set-face-attribute (car face) nil :font "Iosevka" :height (cdr face)))
+    (set-face-attribute (car face) nil :font "Iosevka Comfy" :height (cdr face)))
 
   ;; Ensure that anything that should be fixed-pitch in Org files appears that way
   (set-face-attribute 'org-block nil    :foreground nil :inherit 'fixed-pitch)
@@ -191,7 +191,7 @@ Exempt major modes are defined in `display-line-numbers-exempt-modes'."
     ;; Set the fixed pitch face
     (set-face-attribute 'fixed-pitch nil :font "Fira Code" :height rui/default-font-size)
     ;; Set the variable pitch face
-    (set-face-attribute 'variable-pitch nil :font "Iosevka" :height rui/default-variable-font-size)
+    (set-face-attribute 'variable-pitch nil :font "Iosevka Comfy" :height rui/default-variable-font-size)
     (with-eval-after-load 'org
       (rui/org-font-setup))))
 
@@ -269,7 +269,9 @@ Exempt major modes are defined in `display-line-numbers-exempt-modes'."
   (evil-collection-init))
 
 (use-package evil-escape
-  :init (evil-escape-mode))
+  :init (evil-escape-mode)
+  :custom
+  (evil-escape-unordered-key-sequence t))
 
 
 (use-package perspective
@@ -730,6 +732,10 @@ Exempt major modes are defined in `display-line-numbers-exempt-modes'."
   :ensure nil
   :hook ((text-mode . flyspell-mode)
          (prog-mode . flyspell-prog-mode)))
+
+(use-package ispell
+  :ensure nil
+  :bind ("C-ç" . ispell-word))
 
 (add-hook 'text-mode-hook 'auto-fill-mode)
 
